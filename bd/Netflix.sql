@@ -28,6 +28,8 @@ country varchar(45) not null,
 birthday date
 );
 
+USE Netflix;
+
 ALTER TABLE Movies MODIFY image TEXT NOT NULL;
 ALTER TABLE Actors ADD image text;
 
@@ -45,6 +47,42 @@ INSERT INTO Actors (name, lastname, country, birthday)
 VALUES ('Tom', 'Hanks', 'Estados Unidos', '1956-07-09'),
 ('Roberto', 'Benigni', 'Italia', '1952-10-27'),
 ('John', 'Travolta', 'Estados Unidos', '1954-02-18');
+
+select * from Users;
+
+CREATE TABLE Users_Movies (
+id_userMovies INT NOT NULL auto_increment PRIMARY KEY,
+FK_Users INT,
+FK_Movies INT
+);
+
+CREATE TABLE Actors_Movies (
+id_ActorsMovies INT NOT NULL auto_increment PRIMARY KEY,
+FK_Actor INT,
+FK_Movies INT
+);
+
+ALTER TABLE Users ADD column FK_Movies INT;
+ALTER TABLE Users ADD foreign Key (FK_Movies) references Movies(idMovies);
+
+ALTER TABLE Movies ADD column FK_Users INT;
+ALTER TABLE Movies ADD foreign Key (FK_Users) references Users(idUser);
+
+UPDATE Users
+SET FK_Movies = CONCAT (1, 2)
+WHERE idUser = 1;
+
+UPDATE Users
+SET FK_Movies = 2
+WHERE idUser = 2;
+
+ALTER TABLE Users ADD column Score FLOAT;
+
+select * from Movies;
+ALTER TABLE Users DROP COLUMN FK_Movies;
+
+ALTER TABLE Users_Movies ADD foreign Key (FK_Movies) references Movies(idMovies);
+ALTER TABLE Users_Movies ADD foreign Key (FK_Users) references Users(idUser);
 
 
 
