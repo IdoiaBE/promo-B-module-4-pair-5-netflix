@@ -19,16 +19,16 @@ Por favor marca a continuación los ejercicios que hayáis terminado:
 
 **4.3 Diagramas y relaciones MySQL:**
 
-- [ ] 1.  Piensa qué relación es
-- [ ] 2.  Crea la relación User-Movies.
-- [ ] 3.  Crea la relación Movies-Actors.
+- [x] 1.  Piensa qué relación es
+- [x] 2.  Crea la relación User-Movies.
+- [x] 3.  Crea la relación Movies-Actors.
 
 **4.4 Queries avanzadas de SQL:**
 
 - [ ] 1. Queries avanzadas
-- [ ] 2. Descarga el proyecto
-- [ ] 3. Arranca el front end
-- [ ] 4. Prueba el front end
+- [x] 2. Descarga el proyecto
+- [x] 3. Arranca el front end
+- [x] 4. Prueba el front end
 - [ ] 5. Entiende el código de la carpeta web
 
 **4.5 NodeJS y ExpressJS:**
