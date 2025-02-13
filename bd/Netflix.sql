@@ -68,21 +68,35 @@ ALTER TABLE Users ADD foreign Key (FK_Movies) references Movies(idMovies);
 ALTER TABLE Movies ADD column FK_Users INT;
 ALTER TABLE Movies ADD foreign Key (FK_Users) references Users(idUser);
 
-UPDATE Users
-SET FK_Movies = CONCAT (1, 2)
-WHERE idUser = 1;
+ALTER TABLE Users DROP FOREIGN KEY FK_Movies;
+ALTER TABLE Users DROP COLUMN FK_Movies;
 
-UPDATE Users
-SET FK_Movies = 2
-WHERE idUser = 2;
+ALTER TABLE Movies DROP FOREIGN KEY FK_Users ;
+ALTER TABLE Movies DROP COLUMN FK_Users;
+
 
 ALTER TABLE Users ADD column Score FLOAT;
+ALTER TABLE Users DROP COLUMN Score;
 
-select * from Movies;
-ALTER TABLE Users DROP COLUMN FK_Movies;
+select * from users_movies;
+select * from actors_movies;
 
 ALTER TABLE Users_Movies ADD foreign Key (FK_Movies) references Movies(idMovies);
 ALTER TABLE Users_Movies ADD foreign Key (FK_Users) references Users(idUser);
+
+ALTER TABLE users_movies ADD column Score FLOAT;
+
+INSERT INTO `netflix`.`users_movies` (`FK_Users`, `FK_Movies`, `Score`) VALUES ('1', '1', '8.5');
+INSERT INTO `netflix`.`users_movies` (`FK_Users`, `FK_Movies`, `Score`) VALUES ('1', '2', '9');
+INSERT INTO `netflix`.`users_movies` (`FK_Users`, `FK_Movies`, `Score`) VALUES ('3', '2', '9.75');
+
+select * from users;
+
+INSERT INTO `netflix`.`actors_movies` (`FK_Actor`, `FK_Movies`) VALUES ('1', '3');
+INSERT INTO `netflix`.`actors_movies` (`FK_Actor`, `FK_Movies`) VALUES ('2', '2');
+INSERT INTO `netflix`.`actors_movies` (`FK_Actor`, `FK_Movies`) VALUES ('3', '1');
+
+select * from actors;
 
 
 
