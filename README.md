@@ -25,23 +25,23 @@ Por favor marca a continuación los ejercicios que hayáis terminado:
 
 **4.4 Queries avanzadas de SQL:**
 
-- [ ] 1. Queries avanzadas
+- [x] 1. Queries avanzadas
 - [x] 2. Descarga el proyecto
 - [x] 3. Arranca el front end
 - [x] 4. Prueba el front end
-- [ ] 5. Entiende el código de la carpeta web
+- [x] 5. Entiende el código de la carpeta web
 
 **4.5 NodeJS y ExpressJS:**
 
-- [ ] 1. Arranca el backend
-- [ ] 2. Arranca el frontend
-- [ ] 3. Prueba el proyecto
-- [ ] 4. Entiende el código del proyecto
+- [x] 1. Arranca el backend
+- [x] 2. Arranca el frontend
+- [x] 3. Prueba el proyecto
+- [x] 4. Entiende el código del proyecto
 
 **4.6 Endpoints:**
 
-- [ ] 1. Pide todas las películas. En el front
-- [ ] 2. Pide todas las películas. En el back
+- [x] 1. Pide todas las películas. En el front
+- [x] 2. Pide todas las películas. En el back
 
 **4.7 ExpressJS con MySQL:**
 
