@@ -54,11 +54,14 @@ async function connectBD() {
 //   }
 // })
 
-server.get("/movies", async (req, res)=>{  
+server.get("/moviesFilter", async (req, res)=>{  
   try {
+      console.log(req.query);
+      const {genre} = req.query;
+
       const connection = await connectBD();
-      const sqlSelect = "SELECT * FROM Movies";
-      const [result] = await connection.query(sqlSelect);
+      const sqlSelect = "SELECT * FROM Movies WHERE genre = ?";
+      const [result] = await connection.query(sqlSelect, [genre]);
       connection.end();
 
       if(result.length === 0){
@@ -81,6 +84,36 @@ server.get("/movies", async (req, res)=>{
       });     
   }
 });
+
+// server.get("/api/petsFilter", async (req,res)=>{
+//   try {
+//       // console.log(req.query);
+//       // { name: 'pepa', order: 'name' } en la consola si pongo la url en el servidor
+//       const {name, order} = req.query;
+
+//       const connection = await connectBD();
+
+//       const ordenamiento = order ? `ORDER BY ${order} ASC` : "";
+//       const select = `SELECT * FROM pets WHERE name like ? ${ordenamiento}`
+//       //donde está ? en el mysql iría "pepa"
+//       //se podría poner ${name} pero es menos seguro
+//       //order by y limit no se puede usar ?
+
+//       const [result] = await connection.query(select, [name]);
+//       connection.end();
+
+//       res.json({
+//           data: result,
+//       });
+
+
+//   } catch (error) {
+//       res.status (500).json({    //500 = error en el servidor
+//           status: "error",
+//           message: error,
+//       });     
+//   }
+// });
 
 
 
