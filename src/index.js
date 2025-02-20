@@ -6,13 +6,14 @@ const mysql = require("mysql2/promise");
 const server = express();
 server.use(cors());
 server.use(express.json({limit: "50mb"}));
+require("dotenv").config();
 
 async function connectBD() {
   const conex = await mysql.createConnection({
-      host: "localhost",
-      user: "root", 
-      password: "mysql",
-      database: "netflix",
+    host: process.env.HOSTDB,
+    user: process.env.USERDB,
+    password: process.env.PASSDB,
+    database: process.env.DATABASE
   });
   conex.connect();
   return conex;   
@@ -57,12 +58,21 @@ async function connectBD() {
 server.get("/moviesFilter", async (req, res)=>{  
   try {
       console.log(req.query);
-      const {genre} = req.query;
+      const {genre, sort} = req.query;
 
       const connection = await connectBD();
-      const sqlSelect = "SELECT * FROM Movies WHERE genre = ?";
-      const [result] = await connection.query(sqlSelect, [genre]);
+
+      let sqlSelect = "";
+      if(genre === ""){
+        sqlSelect = "SELECT * FROM Movies ORDER BY ?";
+      } else {
+        sqlSelect = "SELECT * FROM Movies WHERE genre = ? ORDER BY ?";
+      }
+      //const sqlSelect = "SELECT * FROM Movies WHERE genre = ?";
+      const [result] = await connection.query(sqlSelect, [genre, sort]);
       connection.end();
+
+      console.log(result);
 
       if(result.length === 0){
           res.status (404).json({
@@ -119,7 +129,7 @@ server.get("/moviesFilter", async (req, res)=>{
 
 
 // init express aplication
-const serverPort = 4000;
+const serverPort = process.env.PORT;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
