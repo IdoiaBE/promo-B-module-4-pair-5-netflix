@@ -64,12 +64,12 @@ server.get("/moviesFilter", async (req, res)=>{
 
       let sqlSelect = "";
       if(genre === ""){
-        sqlSelect = "SELECT * FROM Movies ORDER BY ?";
+        sqlSelect = `SELECT * FROM Movies ORDER BY title ${sort}`;
       } else {
-        sqlSelect = "SELECT * FROM Movies WHERE genre = ? ORDER BY ?";
+        sqlSelect = `SELECT * FROM Movies WHERE genre = ? ORDER BY title ${sort}`;
       }
       //const sqlSelect = "SELECT * FROM Movies WHERE genre = ?";
-      const [result] = await connection.query(sqlSelect, [genre, sort]);
+      const [result] = await connection.query(sqlSelect, [genre]);
       connection.end();
 
       console.log(result);
