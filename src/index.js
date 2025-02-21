@@ -5,8 +5,11 @@ const mysql = require("mysql2/promise");
 // create and config server
 const server = express();
 server.use(cors());
-server.use(express.json({limit: "50mb"}));
+server.use(express.json());
+server.set('view engine', 'ejs');
 require("dotenv").config();
+
+
 
 async function connectBD() {
   const conex = await mysql.createConnection({
@@ -95,36 +98,21 @@ server.get("/moviesFilter", async (req, res)=>{
   }
 });
 
-// server.get("/api/petsFilter", async (req,res)=>{
-//   try {
-//       // console.log(req.query);
-//       // { name: 'pepa', order: 'name' } en la consola si pongo la url en el servidor
-//       const {name, order} = req.query;
+server.get('/movie/:movieId', async (req, res) =>{
+  console.log(params);
+ 
 
-//       const connection = await connectBD();
+})
 
-//       const ordenamiento = order ? `ORDER BY ${order} ASC` : "";
-//       const select = `SELECT * FROM pets WHERE name like ? ${ordenamiento}`
-//       //donde está ? en el mysql iría "pepa"
-//       //se podría poner ${name} pero es menos seguro
-//       //order by y limit no se puede usar ?
-
-//       const [result] = await connection.query(select, [name]);
-//       connection.end();
-
-//       res.json({
-//           data: result,
-//       });
-
-
-//   } catch (error) {
-//       res.status (500).json({    //500 = error en el servidor
-//           status: "error",
-//           message: error,
-//       });     
-//   }
+// server.get('/detail/:id', async(req, res)=>{
+//   //const id = req.params.id;
+//   const {id} = req.params;
+//   const connection = await connectBD();
+//   const sql = "SELECT * FROM pets WHERE id = ?";
+//   const [result] = await connection.query(sql, [id]);
+//   res.render("detail", { pet: result[0] });
+//   connection.end();
 // });
-
 
 
 
