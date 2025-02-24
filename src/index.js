@@ -109,16 +109,10 @@ server.get('/movie/:movieId', async (req, res) =>{
   res.render("movie", { movie: result[0] });
 })
 
-// server.get('/detail/:id', async(req, res)=>{
-//   //const id = req.params.id;
-//   const {id} = req.params;
-//   const connection = await connectBD();
-//   const sql = "SELECT * FROM pets WHERE id = ?";
-//   const [result] = await connection.query(sql, [id]);
-//   res.render("detail", { pet: result[0] });
-//   connection.end();
-// });
-
+//register
+server.post("/sign-up", async (req, res)=>{
+  
+})
 
 
 // init express aplication
