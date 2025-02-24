@@ -99,9 +99,14 @@ server.get("/moviesFilter", async (req, res)=>{
 });
 
 server.get('/movie/:movieId', async (req, res) =>{
-  console.log(params);
- 
-
+  const {movieId} = req.params; 
+  console.log(req.params);
+  const connection = await connectBD();
+  const sql = "SELECT * FROM movies WHERE idMovies = ?";
+  const [result] = await connection.query(sql, [movieId]);
+  console.log(result);
+  connection.end();
+  res.render("movie", { movie: result[0] });
 })
 
 // server.get('/detail/:id', async(req, res)=>{
@@ -121,3 +126,4 @@ const serverPort = process.env.PORT;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
+
