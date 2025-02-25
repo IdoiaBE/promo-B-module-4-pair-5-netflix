@@ -34,11 +34,12 @@ const sendSignUpToApi = (data) => {
       headers:{
         "Content-Type":"application/json"
       },
-      body: JSON.stringify({ data })
+      body: JSON.stringify(data)
     }
   )
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       // CAMBIA EL CONTENIDO DE ESTE THEN PARA GESTIONAR LA RESPUESTA DEL SERVIDOR Y RETORNAR AL COMPONENTE APP LO QUE NECESITA
       return data
     });
