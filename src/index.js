@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require("mysql2/promise");
+const bcrypt = require("bcrypt");
 
 // create and config server
 const server = express();
@@ -111,7 +112,24 @@ server.get('/movie/:movieId', async (req, res) =>{
 
 //register
 server.post("/sign-up", async (req, res)=>{
-  
+  const connection = await connectBD();
+  const {email, password} = req.body;
+  const selectEmail = 'SELECT email FROM  Users WHERE  email = ? ';
+  const [emailResult] = await connection.query(selectEmail, [email]);
+
+  if (emailResult.length === 0) {
+    //antes de hacer el insert debo encriptar la contraseña
+    const passwordHashed = await bcrypt.hash(password, 10);
+
+    const insertUser =
+      'INSERT INTO Users (email, password, user, name,plan_details) values (?, ?, ?, ?, ?)';
+    const [result] = await connection.query(insertUser, [email, passwordHashed, "", "", ""]);
+
+    res.status(201).json({ success: true, id: result.insertId });
+  } else {
+    //el usuario ya existe -->  respondo con mensje de error
+    res.status(200).json({ success: false, message: 'Usuario ya existe' });
+  }
 })
 
 

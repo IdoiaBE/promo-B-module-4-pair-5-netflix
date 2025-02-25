@@ -98,5 +98,7 @@ INSERT INTO `netflix`.`actors_movies` (`FK_Actor`, `FK_Movies`) VALUES ('3', '1'
 
 select * from actors;
 
+ALTER TABLE Users MODIFY password TEXT NOT NULL;users
+
 
 
